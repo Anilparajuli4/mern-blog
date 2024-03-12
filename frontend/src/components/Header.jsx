@@ -1,4 +1,4 @@
-import { Button, Navbar, NavbarCollapse, TextInput } from "flowbite-react"
+import { Button, Navbar,  TextInput } from "flowbite-react"
 import { Link, useLocation } from "react-router-dom"
 import { IoIosSearch } from "react-icons/io";
 import {FaMoon} from "react-icons/fa"
@@ -23,7 +23,7 @@ function Header() {
             <FaMoon />
           </Button>
           <Link to='signin' >
-            <Button gradientDuoTone='purpleToBlue' color="gray" pill>
+            <Button gradientDuoTone='purpleToBlue' color="gray" pill outline>
               Sign in
             </Button>
           </Link>
