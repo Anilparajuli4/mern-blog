@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import {useDispatch, useSelector} from 'react-redux'
 import { signInStart, signInSuccess, signInfalse } from "../redux/user/userSlice"
+import Oauth from "../components/Oauth"
 
 
 function Signin() {
@@ -64,6 +65,7 @@ function Signin() {
               <TextInput type="text" placeholder="Password" id="password" onChange={handleChange}/>
             </div>
             <Button gradientDuoTone='purpleToPink' type="submit" disabled={loading}>{loading ? (<Spinner size='sm' />) : 'Sign up'}</Button>
+          <Oauth/>
           </form>
           <div className="flex gap-2 text-sm mt-5">
             <span>Dont Have an account?</span>

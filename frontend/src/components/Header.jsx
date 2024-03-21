@@ -2,10 +2,15 @@ import { Button, Navbar,  TextInput } from "flowbite-react"
 import { Link, useLocation } from "react-router-dom"
 import { IoIosSearch } from "react-icons/io";
 import {FaMoon} from "react-icons/fa"
+import { useDispatch, useSelector } from "react-redux";
+import { toogleTheme } from "../redux/theme/themeSlice";
+import { IoSunnyOutline } from "react-icons/io5";
 
 
 function Header() {
   const path = useLocation().pathname
+  const dispatch = useDispatch()
+  const {theme} = useSelector((state)=>state.theme)
   return (
     <Navbar className="border-b-2">
         <Link to='/' className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
@@ -19,8 +24,8 @@ function Header() {
           </Button>
         </form>
         <div className="flex gap-2 md:order-2">
-          <Button className="w-12 h-10 sm:inline " color="gray" pill>
-            <FaMoon />
+          <Button className="w-12 h-10 sm:inline " color="gray" pill onClick={()=>dispatch(toogleTheme())}>
+           {theme==='light' ?<FaMoon size={20}/> : <IoSunnyOutline size={20}/> }
           </Button>
           <Link to='signin' >
             <Button gradientDuoTone='purpleToBlue' color="gray" pill outline>
