@@ -18,7 +18,7 @@ function Signin() {
  async function handleSubmit(e){
     e.preventDefault()
     if( !formData.email || !formData.password){
-      return dispatch(signInfalse('please fill the fomr'))
+      return dispatch(signInfalse('please fill the form'))
     }
     try {
      dispatch(signInStart())
@@ -28,7 +28,7 @@ function Signin() {
         body:JSON.stringify(formData),
        })
        const data = await res.json()
-        dispatch(loading(false))
+       
        if(res.ok){
         dispatch(signInSuccess(data))
         navigate('/')
