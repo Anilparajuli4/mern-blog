@@ -1,4 +1,4 @@
-import { Button, Navbar,  TextInput } from "flowbite-react"
+import { Avatar, Button, Dropdown, Navbar,  TextInput } from "flowbite-react"
 import { Link, useLocation } from "react-router-dom"
 import { IoIosSearch } from "react-icons/io";
 import {FaMoon} from "react-icons/fa"
@@ -9,6 +9,8 @@ import { IoSunnyOutline } from "react-icons/io5";
 
 function Header() {
   const path = useLocation().pathname
+  const {currentuser} = useSelector(state => state.user)
+  
   const dispatch = useDispatch()
   const {theme} = useSelector((state)=>state.theme)
   return (
@@ -27,11 +29,22 @@ function Header() {
           <Button className="w-12 h-10 sm:inline " color="gray" pill onClick={()=>dispatch(toogleTheme())}>
            {theme==='light' ?<FaMoon size={20}/> : <IoSunnyOutline size={20}/> }
           </Button>
-          <Link to='signin' >
+          {currentuser ? <Dropdown arrowIcon={false} inline label={<Avatar alt="user" img={currentuser.profilePicture} rounded/>}>
+            <Dropdown.Header>
+              <span className="block text-sm ">@{currentuser.user.username}</span>
+              <span className="block text-sm font-medium truncate">{currentuser.user.email}</span>
+            </Dropdown.Header>
+            <Link to='/dashboard?tab=profile'><Dropdown.Item>dashboard</Dropdown.Item></Link>
+            <Dropdown.Divider/>
+              <Dropdown.Item>Sign out</Dropdown.Item>
+            
+          </Dropdown>:  <Link to='signin' >
+        
             <Button gradientDuoTone='purpleToBlue' color="gray" pill outline>
               Sign in
             </Button>
-          </Link>
+          </Link>}
+         
        <Navbar.Toggle/>
         </div>
         <Navbar.Collapse>
