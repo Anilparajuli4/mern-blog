@@ -6,6 +6,7 @@ import { app } from "../firebase/Firebase"
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { signOutSuccess, updateFailure, updateStart, updateSucess } from "../redux/user/userSlice"
+import { Link } from "react-router-dom"
 
 
 function DashProfile() {
@@ -26,6 +27,8 @@ function DashProfile() {
      }
     
     }
+
+   
 
     useEffect(()=>{
      if(imagefile){
@@ -118,6 +121,16 @@ function DashProfile() {
            <TextInput onChange={handleChange} type="email" id="email" placeholder="email" defaultValue={currentuser.user.email} />
            <TextInput onChange={handleChange} type="password" id="password" placeholder="password" defaultValue={'******'} />
            <Button type='submit' gradientDuoTone='purpleToBlue' outline>Update</Button>
+           {
+            currentuser?.user?.isAdmin && (
+                <Link to='/create-post'>
+                 <Button type="button" gradientDuoTone='purpleToPink' className="w-full" >
+                   Create a post
+                </Button>
+                </Link>
+                
+            )
+           }
         </form>
         <div className="text-red-500 flex justify-between mt-5">
             <span className="cursor-pointer">Delete Account</span>
