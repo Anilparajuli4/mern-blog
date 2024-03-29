@@ -15,7 +15,7 @@ function Dashboard() {
    if(tabfromUrl){
     setTab(tabfromUrl)
    }
-   console.log(tabfromUrl);
+
   },[location.search])
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
@@ -23,7 +23,7 @@ function Dashboard() {
         <DashSidebar/>
       </div>
       {tab === 'profile' && <DashProfile/>}
-      {tab === 'posts' && <DashPost/>}
+      {tab === 'post' && <DashPost/>}
     </div>
   )
 }

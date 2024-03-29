@@ -22,12 +22,13 @@ export const create = async(req, res, next) =>{
 }
 
 export const getposts =async(req, res, next)=>{
+    
   try {
     const startIndex = parseInt(req.query.startIndex) || 0
     const limit = parseInt(req.query.limit) || 9
     const sortDirection = req.query.sortDirection === 'asc' ? 1 : -1;
     const posts  = await Post.find({
-        ...(req.query.userId && {userId: req.query.userId}),
+        ...(req.query.userid && {userId: req.query.userid}),
         ...(req.query.category && {category: req.query.category}),
         ...(req.query.slug && {category: req.query.slug}),
         ...(req.query.postId && {_id: req.query.postId}),
@@ -58,3 +59,13 @@ export const getposts =async(req, res, next)=>{
     console.log(error);
   }
 }
+
+// export const getPosts= async(req, res)=>{
+//     const startIndex = parseInt(req.query.startIndex || 0)
+//     const limit = paeseInt(req.query.limit || 9)
+//     const sortDirection = req.query.sortDirection === 'asc' ? 1 : -1;
+//     const posts = await Post.find({
+//         ...(req.query.userId && {userId:req.query.userId}),
+//         ...(req.query.category && {category:req.query.category.})
+//     })
+// }
