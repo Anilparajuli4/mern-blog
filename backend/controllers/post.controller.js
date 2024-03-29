@@ -60,6 +60,18 @@ export const getposts =async(req, res, next)=>{
   }
 }
 
+export const deletePost =async (req, res, next) =>{
+if(!req.user.isAdmin || req.user.id !== req.params.userId){
+    return next(errorHandler(400, 'You are not allowed to delete this post'))
+}
+try {
+    await Post.findByIdAndDelete(req.params.postId);
+    res.status(200).json('The post has been deleted')
+} catch (error) {
+    next(error)
+}
+}
+
 // export const getPosts= async(req, res)=>{
 //     const startIndex = parseInt(req.query.startIndex || 0)
 //     const limit = paeseInt(req.query.limit || 9)
@@ -69,3 +81,4 @@ export const getposts =async(req, res, next)=>{
 //         ...(req.query.category && {category:req.query.category.})
 //     })
 // }
+
