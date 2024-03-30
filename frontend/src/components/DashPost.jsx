@@ -1,6 +1,6 @@
-import { Button, Modal, ModalHeader, Table } from "flowbite-react";
+import { Button, Modal, Table } from "flowbite-react";
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import {  useSelector } from "react-redux"
 import { Link } from "react-router-dom";
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 function DashPost() {
@@ -62,6 +62,7 @@ function DashPost() {
             </Table.HeadCell>
           </Table.Head>
           {userPost.map((data)=>(
+         
             <Table.Body key={data._id} className="divide-y">
              <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
               <Table.Cell>{new Date (data.updatedAt).toLocaleDateString()}</Table.Cell>
@@ -79,7 +80,7 @@ function DashPost() {
                 }} className="font-medium text-red-500 hover:underline cursor-pointer">Delete</span>
               </Table.Cell>
               <Table.Cell>
-                <Link className="text-teal-500 hover:underline" to={`/post/${data._id}`}>
+                <Link className="text-teal-500 hover:underline" to={`/update-post/${data._id}`}>
                 <span>Edit</span>
                 </Link>
               
@@ -107,7 +108,7 @@ function DashPost() {
             </h3>
             <div className='flex justify-center gap-4'>
               <Button color='failure' onClick={handleDeletePost}>
-                Yes, I'm sure
+                Yes, I am sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
                 No, cancel
