@@ -91,3 +91,15 @@ export const getUsers= async(req, res, next) =>{
     next(error)
   }
 }
+
+export const deleteUsers=async(req, res, next)=>{
+   if(!req.user.isAdmin && req.user.id !== req.params.userid){
+    return next(errorHandler(403, 'only admin can delete this post'))
+   }
+   try {
+    await User.findByIdAndDelete(req.params.userid);
+    res.status(200).json('The user has been deleted')
+   } catch (error) {
+    next(error)
+   }
+}
