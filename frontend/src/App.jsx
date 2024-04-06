@@ -10,6 +10,7 @@ import PrivateRoute from './components/PrivateRoute'
 import CreatePost from './pages/CreatePost'
 import AdminPrivateRoute from './components/AdminPrivateRoute'
 import UpdatePost from './pages/UpdatePages'
+import PostPage from './pages/PostPage'
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
         <Route path='/project' element={<Projects/>} />
         <Route path='/signin' element={<SignIn/>} />
         <Route path='/signup' element={<SignUp/>} />
-      
+        <Route path='/post/:postSlug' element={<PostPage/>} />
       </Routes>
     </Router>
   )
