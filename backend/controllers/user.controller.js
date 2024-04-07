@@ -103,3 +103,25 @@ export const deleteUsers=async(req, res, next)=>{
     next(error)
    }
 }
+
+
+export const getUser = async(req, res, next)=>{
+  const userId = req.params.userId;
+  if (!userId) {
+    return next(errorHandler(400, 'User ID is missing'));
+  }
+
+  try {
+  
+    const user = await User.findById(req.params.userId);
+    if(!user){
+      return next(errorHandler(404, 'user not found'))
+    }
+    const {passwrod, ...rest} = user._doc
+    console.log(rest);
+    res.status(200).json(rest)
+  } catch (error) {
+    next(error)
+  
+  }
+}
