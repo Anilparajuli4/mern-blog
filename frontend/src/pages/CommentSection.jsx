@@ -45,9 +45,8 @@ function CommentSection({postId}) {
     try {
       const res = await fetch(`/api/comment/getcomment/${postId}`)
       const data = await res.json()
-     
+  
       if(res.ok){
-       
         setCommentError(null)
         setComments(data)
       }
@@ -108,6 +107,7 @@ function CommentSection({postId}) {
         </div>
         <div>
         {comments?.map((data)=>{
+       
         
             return <Comment key={data._id} comment={data}/>
           })}
