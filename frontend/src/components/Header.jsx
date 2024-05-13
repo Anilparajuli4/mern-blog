@@ -1,26 +1,46 @@
 import { Avatar, Button, Dropdown, Navbar,  TextInput } from "flowbite-react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { IoIosSearch } from "react-icons/io";
 import {FaMoon} from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux";
 import { toogleTheme } from "../redux/theme/themeSlice";
 import { IoSunnyOutline } from "react-icons/io5";
+import { useEffect, useState } from "react";
 
 
 function Header() {
   const path = useLocation().pathname
+  const location = useLocation()
   const {currentuser} = useSelector(state => state.user)
-  
+  const [searchterm, setSearchTerm] = useState('')
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const {theme} = useSelector((state)=>state.theme)
+
+  useEffect(()=>{
+const urlParams = new URLSearchParams(location.search)
+const searchTermFromUrl = urlParams.get('searchTerm')
+if(searchTermFromUrl){
+  setSearchTerm(searchTermFromUrl)
+}
+
+  },[location.search])
+
+  const handleSubmit = async(e)=>{
+ e.preventDefault()
+ const urlParams =new URLSearchParams(location.search)
+ urlParams.set('searchTerm', searchterm)
+ const searchQuery = urlParams.toString()
+ navigate(`/search?${searchQuery}`)
+  }
   return (
     <Navbar className="border-b-2">
         <Link to='/' className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white">
             <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">Anil</span>
             Blog
         </Link>
-        <form>
-          <TextInput type="text" placeholder="search..." rightIcon={IoIosSearch} className="hidden lg:inline" pill/>
+        <form onSubmit={handleSubmit}>
+          <TextInput value={searchterm} onChange={(e)=>setSearchTerm(e.target.value)} type="text" placeholder="search..." rightIcon={IoIosSearch} className="hidden lg:inline" pill/>
           <Button className="w-12 h-10 lg:hidden">
             <IoIosSearch/>
           </Button>
@@ -59,7 +79,7 @@ function Header() {
               </Link>
             </Navbar.Link>
             <Navbar.Link  active={path === '/projects'}as={'div'}>
-              <Link to='/projects'>
+              <Link to='/project'>
                 Projects
               </Link>
             </Navbar.Link>
