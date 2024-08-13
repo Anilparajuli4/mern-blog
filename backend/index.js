@@ -13,7 +13,10 @@ app.use(express.json())
 app.use(cookieParser())
 mongoose.connect(process.env.MONGO).then(()=>console.log('database is connected')).catch((err)=>console.log('error', err))
 
-app.listen(3000, ()=>{
+const port = process.env.PORT || 5000
+
+
+app.listen(port, ()=>{
     console.log('server is running');
 })
 
